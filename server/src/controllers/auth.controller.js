@@ -22,6 +22,11 @@ export const signUp = asyncErrorHandler(async (req, res , next)=>{
 
     const token = singToken(user._id)
 
+    res.cookie('token' , token , {
+        httpOnly : true ,
+        maxAge : 100000000,
+    })
+    
     res.status(200).json({
         message : "success",
         token , 
@@ -43,11 +48,16 @@ export const logIn = asyncErrorHandler(async (req , res , next )=>{
     // const isMatch = await user.comparePassword(password , user.password )
 
     if(!user || !(await comparePassword(password , user.password )) ){
-        const err = new customError('User not found ', 400)
+        const err = new customError('User not found or password is not correct ', 400)
         return next(err)
     }
     // generation token
     const token = singToken(user._id)
+
+    res.cookie('token' , token , {
+        maxAge : 100000000,
+        httpOnly : true 
+    })
 
     res.status(200).json({
         message : 'success',
@@ -59,12 +69,15 @@ export const logIn = asyncErrorHandler(async (req , res , next )=>{
 
 export const protect = asyncErrorHandler(async (req , res , next )=>{
     //Token exist 
-    let tempToken = req.headers.authorization
+    let tempToken = req.headers.authorization 
     let token
-    if( tempToken && tempToken.startsWith('bearer')){
+    if( req.headers.authorization && tempToken.startsWith('bearer')){
         token = tempToken.split(' ')[1]
     }
-
+    else{
+        token = req.cookies.token
+    }
+    
     if(!token){
         const err =new customError('You are not loged in' , 401)
         return next(err)

@@ -46,12 +46,10 @@ const validationErrorHandler = (err) => {
 export default (err , req , res , next )=>{
     err.statusCode = err.statusCode || 500
     err.status = err.status || 'error'
-    console.log(process.env.NODE_ENV)
     if(process.env.NODE_ENV === "development"){
         devError(res , err )
     } 
     else if(process.env.NODE_ENV === 'production'){
-        console.log("prod err ")
         if(err.name === 'CastError') err = castErrorHandler(err);
         if(err.code === 11000) err = duplicateKeyErrorHandler(err);
         if(err.name === 'ValidationError') err = validationErrorHandler(err);
