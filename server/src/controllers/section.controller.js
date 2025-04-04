@@ -16,7 +16,7 @@ export const createSection = asyncErrorHandler(async (req ,res, next ) => {
 
     res.status(201).json({
         message : 'successfull',
-        data : data
+        id : data._id
     })
 
 })

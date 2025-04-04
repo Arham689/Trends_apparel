@@ -31,9 +31,7 @@ export const postDepartment = asyncErrorHandler(async (req , res , next) =>{
     res.status(201).json(
         {
             message : 'successful',
-            data : {
-                data
-            }
+            id : data._id
         }
     )
 })

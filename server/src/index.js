@@ -14,8 +14,8 @@ import dotenv from 'dotenv'
 dotenv.config() 
 const app = express() 
 const corsOptions = {
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE' , 'PATCH'],
     credentials: true,
 };
 app.use(express.json())

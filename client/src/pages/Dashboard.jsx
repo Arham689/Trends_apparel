@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import DepartmentLIst from '../components/DepartmentLIst'
+import DepartmentLIst from '../components/Department/DepartmentList'
 const base_url = import.meta.env.VITE_BASE_API_URL
 const Dashboard = () => {
   // const navigate = useNavigate()

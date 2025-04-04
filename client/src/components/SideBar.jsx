@@ -38,16 +38,16 @@ const List = ({ list }) => {
   };
 
   return (
-    <div className='pl-3 font-light'>
+    <div className='pl-3 font-light '>
       {list.map((node) => (
         <div key={node.id}>
           {node.isDropdown ? (
             
             <div 
-              className="p-3 cursor-pointer"
+              className="p-3  hover:bg-slate-200 rounded-md mr-3"
               onClick={(e) => toggleExpand(node.name, e)}
             >
-              <div className='flex justify-between'>
+              <div className='flex justify-between cursor-pointer'>
                 <span className='pl-1 flex gap-1'>
                   {node?.icon && React.createElement(node.icon)}
                   {node.name}
@@ -62,10 +62,10 @@ const List = ({ list }) => {
             <NavLink
               to={node.path || '#'}
               className={({ isActive }) => 
-                `p-2 block ${isActive ? 'bg-gradient-to-r from-primary to-accent text-white rounded-lg' : ''}`
+                `p-2 block ${isActive ? 'bg-gradient-to-r from-primary to-accent text-white rounded-lg mr-3' : 'hover:bg-slate-200 rounded-md mr-3'}`
               }
             >
-              <div className='flex justify-between'>
+              <div className='flex justify-between cursor-pointer'>
                 <span className='pl-1 flex gap-1'>
                   {node?.icon && React.createElement(node.icon)}
                   {node.name}
@@ -87,7 +87,7 @@ const List = ({ list }) => {
 const Sidebar = () => {
   
   return (
-    <div className="max-w-80 h-screen bg-sidebar-default border-r border-sidebar-border pr-3 flex flex-col">
+    <div className="max-w-80 h-screen bg-sidebar-default border-r border-sidebar-border  flex flex-col">
       <div className="p-4 flex items-center border-b border-sidebar-border">
         <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center mr-3">
           <div className="text-white text-xl font-bold">T</div>

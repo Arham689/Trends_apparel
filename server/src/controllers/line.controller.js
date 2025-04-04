@@ -21,6 +21,7 @@ export const postLine = asyncErrorHandler(async (req, res , next )=>{
 
     res.status(201).json({
         message : "successfuly created",
+        id : data._id
     })
 
 })

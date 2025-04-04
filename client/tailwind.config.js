@@ -58,7 +58,7 @@ export default {
 
 		},
 		keyframes : {
-		}
+		},
   	}
   },
   plugins: [require("tailwindcss-animate")],
