@@ -1,19 +1,19 @@
 import axios from 'axios'
 import { X } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 const base_url = import.meta.env.VITE_BASE_API_URL
 
 const AddLine = ({isOpen, setIsOpen,  setLineList, setInput ,input }) => {
+    const [isFocused, setIsFocused] = useState(false);
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(e.target.line.value)
         // console.log(e.target.ActiveOrInactive.value)
         try {
             const data = await axios.post(`${base_url}/api/v1/line`, {
                 lineName: e.target.line.value,
                 // status: e.target.ActiveOrInactive.value
             }, { withCredentials: true })
-            
+
             setLineList((d) => [...d, { lineName: e.target.line.value , _id : data.data.id }])
             setInput('')
             setIsOpen(false)
@@ -50,10 +50,10 @@ const AddLine = ({isOpen, setIsOpen,  setLineList, setInput ,input }) => {
                 <form onSubmit={handleSubmit} className='p-3'>
                     <br />
                     <div>
-                        <div className='text-sm  focus:text-primary text-gray-400'>
+                        <div className={`transition-all duration-200 ${isFocused ? 'text-primary text-sm' : 'text-gray-700'}`}>
                             <label htmlFor="line">Line Name</label>
                         </div>
-                        <input className='w-full h-[30px] mb-3 focus:ring-primary focus:outline-2 focus:outline-primary p-1' value={input} onChange={(e) => { setInput(e.target.value) }} type="text" name='line' placeholder='Type here...' />
+                        <input onFocus={()=>setIsFocused(true)} onBlur={()=>setIsFocused(false)} className={`w-full transition-all duration-300  mb-3 focus:ring-primary focus:outline-2 focus:outline-primary p-1 ${isFocused ? 'h-10' : "h-[30px]"}`} value={input} onChange={(e) => { setInput(e.target.value) }} type="text" name='line' placeholder='Type here...' />
                     </div>
 
                     {/* <div className='text-sm text-gray-400 mb-3'>

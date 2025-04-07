@@ -32,7 +32,7 @@ const handleSubmit = async (e) => {
           username,
           email,
           password,
-        });
+        }, {withCredentials : true});
         Cookies.set('token', response.data.token, { expires: 7, secure: true }); 
         navigate('/department')
         // toast.success(response.data.message);
@@ -46,7 +46,7 @@ const handleSubmit = async (e) => {
         const response = await axios.post(`${base_url}/api/auth/logIn`, {
           email,
           password,
-        } );
+        },{withCredentials : true} );
         //  , {withCredentials : true , headers : { "Content-Type" : "application/json" }}
         Cookies.set('token', response.data.token, { expires: 7, secure: true }); 
         navigate('/department')

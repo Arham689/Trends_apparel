@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import customError from "../utils/CustomError.js";
 import bcrypt from "bcryptjs";
 import util from "util"
+import { decode } from "punycode";
 
 export const singToken = (id)=>{
     return jwt.sign(
@@ -50,6 +51,8 @@ export const logIn = asyncErrorHandler(async (req , res , next )=>{
     if(!user || !(await comparePassword(password , user.password )) ){
         const err = new customError('User not found or password is not correct ', 400)
         return next(err)
+    }else{
+        res.user = user 
     }
     // generation token
     const token = singToken(user._id)
@@ -92,7 +95,9 @@ export const protect = asyncErrorHandler(async (req , res , next )=>{
         const err = new customError('User not founded ' , 401)
         return next(err)
     }
-
+    else{
+        req.user = user 
+    }
     //check for the reset password (optional)
 
 

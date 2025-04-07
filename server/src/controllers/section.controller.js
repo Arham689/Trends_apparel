@@ -12,11 +12,11 @@ export const getSection = asyncErrorHandler( async (req , res , next )=>{
 })
 
 export const createSection = asyncErrorHandler(async (req ,res, next ) => {
-    const data = await Section.create(req.body)
-
+    let data = await Section.create(req.body)
+    data = await data.populate('lineName')
     res.status(201).json({
         message : 'successfull',
-        id : data._id
+        data
     })
 
 })
@@ -32,7 +32,7 @@ export const updateSection = asyncErrorHandler(async (req ,res, next ) => {
     const data =await Section.findByIdAndUpdate(id , {
         sectionName : req.body.sectionName,
         lineName : req.body.lineName
-    },{new : true})
+    },{new : true}).populate('lineName')
 
     if(!data){
         const err = new customError('Data not found' , 404)
