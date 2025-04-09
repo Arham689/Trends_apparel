@@ -99,6 +99,7 @@ const SizeList = () => {
                         <DynamicItemList 
                             key={i} 
                             item={item} 
+                            title={'Size'}
                             setDepartmentList={setSizeList} 
                             departmentList={sizeList}
                             fieldsToDisplay={fieldsToDisplay}

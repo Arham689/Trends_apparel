@@ -60,6 +60,7 @@ const TidNoLIst = () => {
         )
         setIsOpen(false)
     }
+
     // if (isLoading) {
     //     return <h1>loading...</h1>
     // }
@@ -118,6 +119,7 @@ const TidNoLIst = () => {
                         <DynamicItemList 
                             key={i} 
                             item={item} 
+                            title={'TIDNO.'}
                             setDepartmentList={setTidNoList} 
                             departmentList={tidNoList}
                             fieldsToDisplay={fieldsToDisplay}

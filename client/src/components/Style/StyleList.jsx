@@ -103,7 +103,8 @@ const StyleList = () => {
     }
 
     const handleUpdate = (data)=>{
-        console.log("handleSEctoin UPdate ", data.data)
+        console.log("handleSEctoin UPdate ", data.data) 
+        // flatten obj update ?? 
         setStyleList(prev =>
             prev.map((style, i ) =>
                 style._id === data.data._id
@@ -191,6 +192,7 @@ const StyleList = () => {
                         <DynamicItemList
                             key={i} 
                             item={item} 
+                            title={"Style"}
                             setDepartmentList={setStyleList} 
                             departmentList={styleList}
                             fieldsToDisplay={fieldsToDisplay}
@@ -199,7 +201,7 @@ const StyleList = () => {
                             handleUpdate={handleUpdate}
                             initialValues={{
                                 styleName: input,
-                                TidNo : tidNoList[0].value,
+                                TidNo : tidNoList[0]?.value,
                                 status : "Active" 
                             }}
                         />

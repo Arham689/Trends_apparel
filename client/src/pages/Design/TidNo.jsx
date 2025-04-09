@@ -10,7 +10,7 @@ const TidNo = () => {
         <TidNoLIst/>
       </main>
     </div>
-    )
+  )
 }
 
 export default TidNo

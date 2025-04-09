@@ -6,8 +6,9 @@ import SidebarForm from "./SideBarForm"
 
 const base_url = import.meta.env.VITE_BASE_API_URL
 
-const DynamicItemList = ({ item, setDepartmentList, departmentList, fieldsToDisplay , endpoint , editingFields , handleUpdate , initialValues }) => {
+const DynamicItemList = ({ item, setDepartmentList, departmentList, fieldsToDisplay , endpoint , editingFields , handleUpdate  , title }) => {
     const [isEdit, setIsEdit] = useState(false)
+    const [initialValues, setInitialValues] = useState({})
     const id = item._id 
     console.log("titem id " , id)
     // TODO : make the url also dynamic for 
@@ -22,6 +23,17 @@ const DynamicItemList = ({ item, setDepartmentList, departmentList, fieldsToDisp
         }   
     }
 
+    const handleEditClick = () => {
+        const currentItem = departmentList.find(dep => dep._id === id)
+        if (currentItem) {
+            const initialData = {}
+            fieldsToDisplay.forEach(field => {
+                initialData[field.label] = currentItem[field.label]
+            })
+            setInitialValues(initialData)
+            setIsEdit(true)
+        }
+    }
     // If no fields are specified, default to showing DepartmentName and status
     const fields = fieldsToDisplay || ['DepartmentName', 'status']
     return (
@@ -38,7 +50,7 @@ const DynamicItemList = ({ item, setDepartmentList, departmentList, fieldsToDisp
             <SidebarForm
                 isOpen={isEdit}
                 setIsOpen={setIsEdit}
-                title={'TIDNO.'} // static??
+                title={title} // static??
                 fields={editingFields}
                 endpoint={endpoint}
                 onSubmitSuccess={handleUpdate}
@@ -75,7 +87,7 @@ const DynamicItemList = ({ item, setDepartmentList, departmentList, fieldsToDisp
                 <td className="px-6 py-4 whitespace-nowrap text-start text-sm font-medium">
                     <div className="flex justify-start space-x-3">
                         <button 
-                            onClick={() => setIsEdit(prev => !prev)}
+                            onClick={handleEditClick}
                             className="text-yellow-400 hover:text-orange-900"
                         >
                             <Edit3 size={18} />

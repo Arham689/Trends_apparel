@@ -130,6 +130,7 @@ const ColorList = () => {
                         <DynamicItemList 
                             key={i} 
                             item={item} 
+                            title={'Color'}
                             setDepartmentList={setColorList} 
                             departmentList={colorList}
                             fieldsToDisplay={fieldsToDisplay}
