@@ -2,34 +2,35 @@ import axios from 'axios'
 import React, { use, useEffect, useState } from 'react'
 import DepartmentItem from './DepartmentItem'
 import AddDepertment from './AddDepertment'
+import useFetch from '../../hooks/useFetch.js'
 const base_url = import.meta.env.VITE_BASE_API_URL
 const DepartmentLIst = () => {
     const [departmentList, setDepartmentList] = useState([])
     const [input, setInput] = useState('')
     const [isOpen, setIsOpen] = useState(false)
-    const getDepartment = async () => {
-        try {
-            const res = await axios.get(`${base_url}/api/v1/departments`, { withCredentials: true })
-            console.log(res.data.data.departmentData)
-            setDepartmentList(res.data.data.departmentData)
-        } catch (error) {
-            console.log(error)
-
-        }
-    }
+    const {data , isLoading , error } = useFetch(`${base_url}/api/v1/departments`)
 
     const handleAddList = () => {
         setIsOpen(s => !s)
     }
 
     useEffect(() => {
-        getDepartment()
-    }, [])
+        // getDepartment()
+        if(data)
+        {
+            setDepartmentList(data.departmentData)
+        }
 
-    if (departmentList.length === 0) {
+    }, [data])
+
+    if (isLoading) {
         return <h1>loading...</h1>
     }
 
+    if(error)
+    {
+        return <h1 className='py-12 px-5 bg-red-200 rounded-lg text-red-600 text-2xl border-red-500 border-[2px]'>Something Went Wrong Please Try Again Later... </h1>
+    }
     return (
         <div className="bg-white shadow rounded-lg overflow-hidden">
             <div className="flex justify-between items-center p-5 border-b border-gray-200">

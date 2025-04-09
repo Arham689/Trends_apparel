@@ -1,11 +1,13 @@
-import { Line } from "../models/lines.models.js";
+
+import { Size } from "../models/size.models.js";
+
 import { asyncErrorHandler } from "../utils/asyncErrorHandler.js";
 import customError from "../utils/CustomError.js";
-export const getLine = asyncErrorHandler(async (req , res , next ) => {
+export const getSize = asyncErrorHandler(async (req , res , next ) => {
     console.log("user" , req.user)
     const userId = req.user._id
 
-    const data = await Line.find({userId})
+    const data = await Size.find({userId})
 
     res.status(200).json({
         message : "successfull",
@@ -13,10 +15,10 @@ export const getLine = asyncErrorHandler(async (req , res , next ) => {
     })
 })
 
-export const postLine = asyncErrorHandler(async (req, res , next )=>{
+export const postSize = asyncErrorHandler(async (req, res , next )=>{
     console.log("user" , req.user)
     const userId = req.user._id;
-    const data =  await Line.create({...req.body , userId })
+    const data =  await Size.create({...req.body , userId })
 
     if(!data){
         const err = new customError('Data not found' , 404 )
@@ -25,21 +27,21 @@ export const postLine = asyncErrorHandler(async (req, res , next )=>{
 
     res.status(201).json({
         message : "successfuly created",
-        id : data._id
+        data
     })
 
 })
 
-export const updateLine = asyncErrorHandler(async (req, res , next )=>{
+export const updateSize = asyncErrorHandler(async (req, res , next )=>{
     const id = req.params.id
 
-    if(!req.body.lineName){
+    if(!req.body.sizeName){
         const err = new customError('Data not found' , 400 )
         return next(err)
     }
 
-    const data = await Line.findByIdAndUpdate(id , {
-        lineName : req.body.lineName
+    const data = await Size.findByIdAndUpdate(id , {
+        sizeName : req.body.sizeName
     } , {new  : true })
 
     if(!data){
@@ -53,10 +55,10 @@ export const updateLine = asyncErrorHandler(async (req, res , next )=>{
     })
 })
 
-export const deleteLine = asyncErrorHandler(async (req, res , next )=>{
+export const deleteSize = asyncErrorHandler(async (req, res , next )=>{
     const id = req.params.id
 
-    const data = await Line.findByIdAndDelete(id)
+    const data = await Size.findByIdAndDelete(id)
 
     if(!data){
         const err = new customError('Data not found' , 404)

@@ -1,12 +1,13 @@
-import { Department } from "../models/department.models.js";
+import { Color } from "../models/color.model.js";
 import { asyncErrorHandler } from "../utils/asyncErrorHandler.js";
 import customError from "../utils/CustomError.js";
 
-export const getDepartment =  asyncErrorHandler(async (req , res , next )=>{
+export const getColor =  asyncErrorHandler(async (req , res , next )=>{
     const userId = req.user._id
-    const departmentData = await Department.find({userId})
     
-    if(!departmentData){
+    const colorData = await Color.find({userId})
+    
+    if(!colorData){
         const err = new customError('Data not found' , 404 )
         return next(err)
     }
@@ -14,14 +15,14 @@ export const getDepartment =  asyncErrorHandler(async (req , res , next )=>{
     res.status(200).json({
         message : 'successful',
         data : {
-            departmentData
+            colorData
         }
     })
 })
 
-export const postDepartment = asyncErrorHandler(async (req , res , next) =>{
+export const postColor = asyncErrorHandler(async (req , res , next) =>{
     const userId = req.user._id
-    const data = await Department.create({...req.body , userId });
+    const data = await Color.create({...req.body , userId });
 
     if(!data){
         const err = new customError('Data not found' , 404 )
@@ -31,22 +32,22 @@ export const postDepartment = asyncErrorHandler(async (req , res , next) =>{
     res.status(201).json(
         {
             message : 'successful',
-            id : data._id
+            data
         }
     )
 })
 
-export const updateDepartment = asyncErrorHandler(async (req, res , next ) => {
+export const updateColor = asyncErrorHandler(async (req, res , next ) => {
     const id = req.params.id
-    if(!req.body.DepartmentName || !req.body.status){
+    if(!req.body.colorName || !req.body.status){
 
         const err = new customError('Data not found' , 404 )
         return next(err)
     
     }
 
-    const data = await Department.findByIdAndUpdate(id , {
-        DepartmentName : req.body.DepartmentName,
+    const data = await Color.findByIdAndUpdate(id , {
+        colorName : req.body.colorName,
         status : req.body.status
     } , {new : true })
     
@@ -61,10 +62,10 @@ export const updateDepartment = asyncErrorHandler(async (req, res , next ) => {
     })
 })
 
-export const deleteDepartment = asyncErrorHandler(async (req , res , next ) =>{
+export const deleteColor = asyncErrorHandler(async (req , res , next ) =>{
     const id = req.params.id 
 
-    const data = await Department.findOneAndDelete({
+    const data = await Color.findOneAndDelete({
         _id : id 
     })
 

@@ -10,6 +10,11 @@ import lineRoute from "./routes/line.route.js"
 import sectoinRouter from "./routes/section.route.js"
 import authRoute from "./routes/auth.route.js"
 import dotenv from 'dotenv'
+import tidnoRoute from "./routes/tidno.route.js"
+import sytleRoute from "./routes/style.route.js"
+import colorRoute from "./routes/color.router.js"
+import garmentRoute from "./routes/garment.route.js"
+import sizeRoute from "./routes/size.route.js"
 
 dotenv.config() 
 const app = express() 
@@ -31,6 +36,11 @@ app.use('/api/v1' , route)
 app.use('/api/v1' , departmentroute)
 app.use('/api/v1' , lineRoute)
 app.use('/api/v1' , sectoinRouter)
+app.use('/api/v1' , tidnoRoute )
+app.use('/api/v1' , sytleRoute )
+app.use('/api/v1' , colorRoute)
+app.use('/api/v1' , garmentRoute )
+app.use('/api/v1' , sizeRoute)
 
 app.use('/api/auth' , authRoute)
 

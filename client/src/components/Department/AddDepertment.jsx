@@ -1,9 +1,10 @@
 import axios from "axios"
 import { X } from "lucide-react"
 import { useState } from "react";
+
 const base_url = import.meta.env.VITE_BASE_API_URL
 const AddDepertment = ({ isOpen, setIsOpen, input, setInput, setDepartmentList }) => {
-     const [isFocused, setIsFocused] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(e.target.department.value)
@@ -13,7 +14,6 @@ const AddDepertment = ({ isOpen, setIsOpen, input, setInput, setDepartmentList }
                 DepartmentName: e.target.department.value,
                 status: e.target.ActiveOrInactive.value
             }, { withCredentials: true })
-
             setDepartmentList((d) => [...d, { DepartmentName: e.target.department.value.toUpperCase(), status: e.target.ActiveOrInactive.value , _id : data.data.id}])
             setInput('')
             setIsOpen(false)
@@ -26,9 +26,9 @@ const AddDepertment = ({ isOpen, setIsOpen, input, setInput, setDepartmentList }
             {isOpen && (<div onClick={()=>setIsOpen(false)} className="fixed inset-0 bg-black bg-opacity-50 z-40"/>)}
 
             <div className={`
-                        fixed top-0 right-0 h-screen min-w-[350px] bg-white z-50 transform transition-transform duration-300 ease-in-out
-                        ${isOpen ? 'translate-x-0' : 'translate-x-full'}
-                        overflow-y-auto
+                    fixed top-0 right-0 h-screen min-w-[350px] bg-white z-50 transform transition-transform duration-300 ease-in-out
+                    ${isOpen ? 'translate-x-0' : 'translate-x-full'}
+                    overflow-y-auto
                 `}
                 role="dialog"
                 aria-modal="true"

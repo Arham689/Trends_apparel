@@ -26,9 +26,9 @@ const LineList = () => {
         getlineList()
     },[])
 
-    if (LineList.length === 0) {
-        return <h1>loading...</h1>
-    }
+    // if (LineList.length === 0) {
+    //     return <h1>loading...</h1>
+    // }
 
     return (
         <div className="bg-white shadow rounded-lg overflow-hidden">

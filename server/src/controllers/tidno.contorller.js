@@ -1,12 +1,13 @@
-import { Department } from "../models/department.models.js";
+import { TIDNO } from "../models/tIdno.models.js";
 import { asyncErrorHandler } from "../utils/asyncErrorHandler.js";
 import customError from "../utils/CustomError.js";
 
-export const getDepartment =  asyncErrorHandler(async (req , res , next )=>{
-    const userId = req.user._id
-    const departmentData = await Department.find({userId})
+export const getTidno = asyncErrorHandler(async (req , res , next )=>{
+    const userId = req.user._id ; 
+
+    const tidnoData = await TIDNO.find({userId})
     
-    if(!departmentData){
+    if(!tidnoData){
         const err = new customError('Data not found' , 404 )
         return next(err)
     }
@@ -14,14 +15,14 @@ export const getDepartment =  asyncErrorHandler(async (req , res , next )=>{
     res.status(200).json({
         message : 'successful',
         data : {
-            departmentData
+            tidnoData
         }
     })
 })
 
-export const postDepartment = asyncErrorHandler(async (req , res , next) =>{
+export const postTidno = asyncErrorHandler(async (req , res , next )=>{
     const userId = req.user._id
-    const data = await Department.create({...req.body , userId });
+    const data = await TIDNO.create({...req.body , userId });
 
     if(!data){
         const err = new customError('Data not found' , 404 )
@@ -31,22 +32,22 @@ export const postDepartment = asyncErrorHandler(async (req , res , next) =>{
     res.status(201).json(
         {
             message : 'successful',
-            id : data._id
+            data
         }
     )
 })
 
-export const updateDepartment = asyncErrorHandler(async (req, res , next ) => {
+export const patchTidno = asyncErrorHandler(async (req , res , next )=>{
     const id = req.params.id
-    if(!req.body.DepartmentName || !req.body.status){
+    if(!req.body.TIDNOName || !req.body.status){
 
-        const err = new customError('Data not found' , 404 )
+        const err = new customError('All fields are required ' , 404 )
         return next(err)
     
     }
 
-    const data = await Department.findByIdAndUpdate(id , {
-        DepartmentName : req.body.DepartmentName,
+    const data = await TIDNO.findByIdAndUpdate(id , {
+        TIDNOName : req.body.TIDNOName,
         status : req.body.status
     } , {new : true })
     
@@ -57,14 +58,14 @@ export const updateDepartment = asyncErrorHandler(async (req, res , next ) => {
 
     res.status(200).json({
         message : "Data updated ",
-        data : data
+        data :data 
     })
 })
 
-export const deleteDepartment = asyncErrorHandler(async (req , res , next ) =>{
+export const deleteTidno = asyncErrorHandler(async (req , res , next )=>{
     const id = req.params.id 
 
-    const data = await Department.findOneAndDelete({
+    const data = await TIDNO.findOneAndDelete({
         _id : id 
     })
 

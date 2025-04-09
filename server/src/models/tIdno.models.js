@@ -1,18 +1,18 @@
 import mongoose,{Schema} from "mongoose";
 
-const departmentmodel =new Schema({
+const TIDNOmodel =new Schema({
     userId : {
         type : mongoose.Schema.Types.ObjectId ,
         ref : "User",
         require : [true , "user id require "] , 
     },
-    DepartmentName : {
+    TIDNOName : {
         type : String , 
-        required : [true , 'Name is required '] , 
+        required : [true , ' TID Name is required '] , 
         trim : true , 
         // unique : true , 
-        maxlength : [20 , 'DepartmentName must not have more than 20 char'],
-        minlength : [3 , 'DepartmentName must have atleast 3 char'],
+        maxlength : [10 , 'TID must not have more than 10 char'],
+        minlength : [3 , 'TID must have atleast 3 char'],
         uppercase : true
     },
     status : {
@@ -22,4 +22,4 @@ const departmentmodel =new Schema({
     }
 }, {timestamps : true})
 
-export const Department = mongoose.model('Department' , departmentmodel)
+export const TIDNO = mongoose.model('TIDNO' , TIDNOmodel)

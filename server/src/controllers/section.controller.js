@@ -3,7 +3,8 @@ import { Section } from "../models/sections.models.js";
 import customError from "../utils/CustomError.js";
 
 export const getSection = asyncErrorHandler( async (req , res , next )=>{
-    const data  = await Section.find({}).populate('lineName')
+    const userId = req.user._id
+    const data  = await Section.find({userId}).populate('lineName')
 
     res.status(200).json({
         message : "successfull",
@@ -12,13 +13,13 @@ export const getSection = asyncErrorHandler( async (req , res , next )=>{
 })
 
 export const createSection = asyncErrorHandler(async (req ,res, next ) => {
-    let data = await Section.create(req.body)
+    const userId = req.user._id;
+    let data = await Section.create({...req.body , userId })
     data = await data.populate('lineName')
     res.status(201).json({
         message : 'successfull',
         data
     })
-
 })
 
 export const updateSection = asyncErrorHandler(async (req ,res, next ) => {

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Edit3, Trash } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import SidebarForm from '../line/SideBarForm'
+import SidebarForm from '../ui/SideBarForm'
 const base_url = import.meta.env.VITE_BASE_API_URL
 
 export const SectionItem = ({ item, setsectionList, sectionList }) => {
@@ -15,7 +15,7 @@ export const SectionItem = ({ item, setsectionList, sectionList }) => {
             label: 'section Name',
             placeholder: 'Type here...',
             type: 'text'
-        },  
+        },
         {
             name: 'lineName',
             label: 'Select Line',
@@ -106,13 +106,13 @@ export const SectionItem = ({ item, setsectionList, sectionList }) => {
                 <td className="px-6 py-4 text-sm text-gray-500">{item.lineName.lineName}</td>
                 <td className="px-6 py-4 text-sm font-medium">
                     <div className="flex space-x-3">
-                        <button 
+                        <button
                             onClick={() => setIsOpen(e => !e)}
                             className="text-yellow-600 hover:text-orange-900"
                         >
                             <Edit3 size={18} />
                         </button>
-                        <button 
+                        <button
                             onClick={handleDelete}
                             className="text-red-600 hover:text-red-900"
                         >
