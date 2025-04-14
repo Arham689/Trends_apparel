@@ -44,7 +44,7 @@ const List = ({ list }) => {
           {node.isDropdown ? (
             
             <div 
-              className="p-3 mb-2 hover:bg-slate-200 rounded-md mr-3"
+              className="p-3 mb-2 hover:bg-slate-200 rounded-md mr-3 animate-fadeIn"
               onClick={(e) => toggleExpand(node.name, e)}
             >
               <div className='flex justify-between cursor-pointer'>
@@ -62,7 +62,7 @@ const List = ({ list }) => {
             <NavLink
               to={node.path || '#'}
               className={({ isActive }) => 
-                `p-2 mb-2 block ${isActive ? 'bg-gradient-to-r from-primary to-accent text-white rounded-lg mr-3' : 'hover:bg-slate-200 rounded-md mr-3'}`
+                `p-2 mb-2 block animate-dropdownIn ${isActive ? 'bg-gradient-to-r from-primary to-accent text-white rounded-lg mr-3' : 'hover:bg-slate-200 rounded-md mr-3'}`
               }
             >
               <div className='flex justify-between cursor-pointer'>

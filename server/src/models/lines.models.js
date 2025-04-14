@@ -4,7 +4,7 @@ const linesSchema = new mongoose.Schema({
     userId : {
         type : mongoose.Schema.Types.ObjectId ,
         ref : "User",
-        require : [true , "user id require "] , 
+        required : [true , "user id require "] , 
     },
     lineName : {
         type : String , 

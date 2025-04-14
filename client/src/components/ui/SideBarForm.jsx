@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ClockFading, X } from 'lucide-react'
+import { ClockFading, X  , ChevronUp, ChevronDown } from 'lucide-react'
 import React, { useState, useEffect } from 'react'
 const base_url = import.meta.env.VITE_BASE_API_URL
 
@@ -16,6 +16,8 @@ const SidebarForm = ({
 }) => {
   const [formValues, setFormValues] = useState(initialValues)
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [visibleDropdown, setVisibleDropdown] = useState(null);
+  const [animatingOut, setAnimatingOut] = useState(false);
 
   useEffect(() => {
     setFormValues(initialValues)
@@ -29,6 +31,19 @@ const SidebarForm = ({
       [fieldName]: value
     }))
   }
+
+  const handleToggleDropdown = (name) => {
+    if (visibleDropdown === name) {
+      setAnimatingOut(true);
+      setTimeout(() => {
+        setVisibleDropdown(null);
+        setAnimatingOut(false);
+      }, 200); // match your animation duration
+    } else {
+      setVisibleDropdown(name);
+    }
+    setOpenDropdown(openDropdown === name ? null : name);
+  };
 
 
   const handleSubmit = async (e) => {
@@ -77,37 +92,38 @@ const SidebarForm = ({
             {/* Custom select component */}
             <div 
               className="w-full h-[40px] mb-3 border border-gray-300 rounded px-3 flex items-center justify-between cursor-pointer bg-white"
-              onClick={() => toggleDropdown(field.name)}
+              onClick={() => handleToggleDropdown(field.name)}
             >
               <span className={formValues[field.name] ? 'text-gray-700' : 'text-gray-400'}>
                 {formValues[field.name] ? 
                   field.options.find(option => option.value === formValues[field.name])?.label : 
                   'Please select...'}
               </span>
-              <svg 
-                className={`w-4 h-4 transition-transform duration-300 ${openDropdown === field.name ? 'transform rotate-180' : ''}`} 
+              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${openDropdown === field.name ? 'transform -rotate-180' : ''}`}  />
+              {/* <svg 
+                
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24" 
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
+              </svg> */}
             </div>
             
             {/* Dropdown options */}
-            {openDropdown === field.name && (
-              <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded shadow-lg max-h-60 overflow-auto animate-fadeIn">
-                <div 
+            {visibleDropdown === field.name && (
+              <div className={`absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded shadow-lg max-h-60 overflow-auto ${animatingOut ? "animate-fadeOut" : "animate-fadeIn"}`}>
+                {/* <div 
                   className="p-2 hover:bg-gray-100 cursor-pointer text-gray-400"
                   onClick={() => handleOptionSelect(field.name, '')}
                 >
                   Please select...
-                </div>
+                </div> */}
                 {field.options.map((option) => (
                   <div 
                     key={option.value} 
-                    className={`p-2 cursor-pointer hover:bg-gray-100 ${formValues[field.name] === option.value ? 'bg-blue-50 text-primary' : 'text-gray-700'}`}
+                    className={`p-2 cursor-pointer hover:bg-gray-200 ${formValues[field.name] === option.value ? 'bg-blue-50 text-primary' : 'text-gray-700'}`}
                     onClick={() => handleOptionSelect(field.name, option.value)}
                   >
                     {option.label}
@@ -153,20 +169,11 @@ const toggleDropdown = (fieldName) => {
 const handleOptionSelect = (fieldName, value) => {
   handleChange(fieldName, value);
   setOpenDropdown(null);
+  setVisibleDropdown(false)
 };
 
 // Add this style to your component or CSS file
-const style = document.createElement('style');
-style.innerHTML = `
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .animate-fadeIn {
-    animation: fadeIn 0.2s ease-out forwards;
-  }
-`;
-document.head.appendChild(style);
+
 
   return (
     <div>

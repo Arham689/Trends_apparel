@@ -4,7 +4,7 @@ const styleSchema = new Schema({
     userId : {
         type : mongoose.Schema.Types.ObjectId ,
         ref : "User",
-        require : [true , "user id require "] , 
+        required : [true , "user id require "] , 
     },
     styleName : {
         type : String , 
@@ -23,7 +23,7 @@ const styleSchema = new Schema({
     Tidno  : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'TIDNO',
-        require : [true , 'tidno is require ']
+        required : [true , 'tidno is require ']
     }   
 } , {timestamps : true})
 

@@ -5,7 +5,7 @@ const garmentSchema = new Schema({
     userId : {
         type : mongoose.Schema.Types.ObjectId ,
         ref : "User",
-        require : [true , "user id require "] , 
+        required : [true , "user id require "] , 
     },
     garmentName : {
         type : String , 

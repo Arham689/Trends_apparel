@@ -15,7 +15,8 @@ import sytleRoute from "./routes/style.route.js"
 import colorRoute from "./routes/color.router.js"
 import garmentRoute from "./routes/garment.route.js"
 import sizeRoute from "./routes/size.route.js"
-
+import opeartionRoute from "./routes/operation.route.js"
+import mappingRoute from "./routes/mapping.route.js"
 dotenv.config() 
 const app = express() 
 const corsOptions = {
@@ -41,7 +42,8 @@ app.use('/api/v1' , sytleRoute )
 app.use('/api/v1' , colorRoute)
 app.use('/api/v1' , garmentRoute )
 app.use('/api/v1' , sizeRoute)
-
+app.use('/api/v1' , opeartionRoute )
+app.use('/api/v1' , mappingRoute )
 app.use('/api/auth' , authRoute)
 
 app.get('/', (req, res) => {

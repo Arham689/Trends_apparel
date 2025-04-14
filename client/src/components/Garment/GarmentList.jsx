@@ -141,9 +141,7 @@ const GarmentList = () => {
             console.log(error)
         }
     }
-
-    useEffect(()=>{
-    } , [])
+    
     // if (isLoading) {
     //     return <h1>loading...</h1>
     // }

@@ -21,6 +21,8 @@ import Supervisor from './pages/Supervisor';
 import Bundles from './pages/Bundles';
 import Tasks from './pages/Tasks';
 import Reports from './pages/Reports';
+import OperationCreate from './components/Operation/OperationCreate';
+import OperationEdit from './pages/Production/OperationEdit';
 export const App = () => {
     return (
         <>
@@ -40,6 +42,8 @@ export const App = () => {
                         <Route path="/size" element={<Sizes />} />
                         <Route path='/operation' element={<Operations />} />
                         <Route path='/operation-mapping' element={<OperationMapping />} />
+                        <Route path='/operation-mapping/create' element={<OperationCreate />} />
+                        <Route path='/operation-mapping/edit/:id' element={<OperationEdit/> } />
                         <Route path='/machines' element={<Machines />} />
                         <Route path='/machine-issues' element={<MachineIssue/>} />
                         <Route path='/worker' element={<Workers/>} />

@@ -77,7 +77,7 @@ const DynamicItemList = ({ item, setDepartmentList, departmentList, fieldsToDisp
                     
                     // Default rendering for other fields
                     return (
-                        <td key={i} className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <td key={i} className="px-6 py-4 whitespace-nowrap text-lg font-light text-gray-500">
                             {item[field.label]}
                         </td>
                     )
