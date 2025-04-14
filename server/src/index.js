@@ -17,6 +17,9 @@ import garmentRoute from "./routes/garment.route.js"
 import sizeRoute from "./routes/size.route.js"
 import opeartionRoute from "./routes/operation.route.js"
 import mappingRoute from "./routes/mapping.route.js"
+import machineRotue from "./routes/machine.route.js"
+import issueRoute from "./routes/machineIssue.route.js"
+
 dotenv.config() 
 const app = express() 
 const corsOptions = {
@@ -44,6 +47,9 @@ app.use('/api/v1' , garmentRoute )
 app.use('/api/v1' , sizeRoute)
 app.use('/api/v1' , opeartionRoute )
 app.use('/api/v1' , mappingRoute )
+app.use('/api/v1' , machineRotue)
+app.use('/api/v1' , issueRoute)
+
 app.use('/api/auth' , authRoute)
 
 app.get('/', (req, res) => {
