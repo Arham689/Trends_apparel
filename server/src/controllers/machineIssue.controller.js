@@ -1,6 +1,7 @@
 import {protect } from '../controllers/auth.controller.js'
 import { MachineIssue } from '../models/machineIssue.models.js'
 import { asyncErrorHandler } from '../utils/asyncErrorHandler.js'
+import customError from '../utils/CustomError.js';
 
 export const getIssue = asyncErrorHandler(async (req , res , next )=>{
 

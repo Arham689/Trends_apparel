@@ -72,7 +72,6 @@ const MappingList = () => {
                 {mappingList.map((item , i ) => (   
                     <tr className="border-b border-gray-200">
                     {fieldsToDisplay.map((field, i) => {
-                      // Special case for status field
 
                       console.log(field)
                       if (field.value === 'status') {
@@ -91,7 +90,6 @@ const MappingList = () => {
                         );
                       }
                   
-                      // Special case for operations field (render tags)
                       if (field.value === 'operations') {
                         return (
                           <td key={field.value} className="px-6 py-4 whitespace-nowrap max-w-xl">
@@ -132,7 +130,6 @@ const MappingList = () => {
                       );
                     })}
                   
-                    {/* Actions */}
                     <td className="px-6 py-4 whitespace-nowrap text-start text-sm font-medium">
                       <div className="flex justify-start space-x-3">
                         <button onClick={()=>{navigate(`/operation-mapping/edit/${item._id}`)}} className="text-yellow-400 hover:text-yellow-600"> {/** add onClick  */}

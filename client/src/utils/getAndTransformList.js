@@ -7,7 +7,8 @@ export const fetchAndTransformList = async ({
   setFields,              // State updater to update form field options
   fieldName,              // Name of the field in form to be updated
   setIsFormReady = null  , // Optional function to trigger when data is ready
-  dataKey = null
+  dataKey = null,
+  setError = null 
 }) => {
   try {
     const response = await axios.get(url, { withCredentials: true });
@@ -36,7 +37,11 @@ export const fetchAndTransformList = async ({
     if (setIsFormReady && transformedList.length > 0) {
       setIsFormReady(true);
     }
+
+    setError && setError(false)
+
   } catch (error) {
     console.error(`Error fetching from ${url}:`, error);
+    setError && setError(true)
   }
 };

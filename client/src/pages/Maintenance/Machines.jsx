@@ -1,6 +1,8 @@
 import React from 'react'
 import MachineList from '@/components/Machine/MachineList'
+import { useIsAuth } from '@/hooks/useIsAuth'
 const Machines = () => {
+  useIsAuth()
   return (
     <div>
       <div className="flex p-3 shadow-lg mx-3 border border-gray-50 overflow-x-hidden">

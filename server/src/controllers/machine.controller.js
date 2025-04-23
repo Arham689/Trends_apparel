@@ -1,5 +1,6 @@
 import {Machine} from "../models/machine.models.js";
 import { asyncErrorHandler } from "../utils/asyncErrorHandler.js";
+import customError from "../utils/CustomError.js";
 
 export const getMachine = asyncErrorHandler(async (req , res , next ) => {
     const userId = req.user._id ;

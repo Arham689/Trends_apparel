@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import { protect  } from "../controllers/auth.controller.js";
-import { deleteMapping, getMapping, getMappingWithId, postMapping, updateMapping } from '../controllers/mapping.contorller.js';
+import { deleteMapping, getMapping, getMappingWithId, getOperationsForBundle, postMapping, updateMapping } from '../controllers/mapping.contorller.js';
 
 const mappingRoute = Router() 
 
@@ -13,5 +13,7 @@ mappingRoute.post('/mapping' , protect  , postMapping )
 mappingRoute.patch('/mapping/:id' , protect  , updateMapping )
 
 mappingRoute.delete('/mapping/:id' , protect  , deleteMapping )
+
+mappingRoute.get('/mapping-bundle'  , protect , getOperationsForBundle )
 
 export default mappingRoute ; 

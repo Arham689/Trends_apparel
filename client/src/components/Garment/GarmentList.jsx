@@ -15,7 +15,7 @@ const GarmentList = () => {
     const [colorList, setColorList] = useState([])
 
     const fieldsToDisplay = [
-        {label : 'garmentName' , value : 'TIDNO.'}, 
+        {label : 'garmentName' , value : 'Garment Code'}, 
         { label : 'orderQuantity' , value : "Order Quantity"},
         { label : 'style_styleName' , value : "style"},
         { label : 'color_colorName' , value : "color"},

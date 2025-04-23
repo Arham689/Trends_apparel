@@ -19,6 +19,9 @@ import opeartionRoute from "./routes/operation.route.js"
 import mappingRoute from "./routes/mapping.route.js"
 import machineRotue from "./routes/machine.route.js"
 import issueRoute from "./routes/machineIssue.route.js"
+import workerRoute from "./routes/wokrer.router.js"
+import supervisorRotue from "./routes/supervisor.route.js"
+import bundleRoute from "./routes/bundle.route.js"
 
 dotenv.config() 
 const app = express() 
@@ -49,6 +52,9 @@ app.use('/api/v1' , opeartionRoute )
 app.use('/api/v1' , mappingRoute )
 app.use('/api/v1' , machineRotue)
 app.use('/api/v1' , issueRoute)
+app.use('/api/v1' , workerRoute)
+app.use('/api/v1' , supervisorRotue)
+app.use('/api/v1' , bundleRoute)
 
 app.use('/api/auth' , authRoute)
 
