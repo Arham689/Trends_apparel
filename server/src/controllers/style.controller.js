@@ -80,3 +80,20 @@ export const deletestyle = asyncErrorHandler(async (req , res , next )=>{
         message : 'Deleted'
     })
 })
+
+export const getStyleByTrendId = asyncErrorHandler(async (req , res , next )=>{
+    const id = req.params.id
+
+    const data = await Style.findOne({Tidno : id }).populate('Tidno')
+
+    if(!data) {
+        const err = new customError('Data not found' , 404)
+        return next(err)
+    }
+
+    res.status(200).json({
+        message : "successfull",
+        data :  [data]
+    })
+
+})

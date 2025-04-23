@@ -23,6 +23,11 @@ import Tasks from './pages/Tasks';
 import Reports from './pages/Reports';
 import OperationCreate from './components/Operation/OperationCreate';
 import OperationEdit from './pages/Production/OperationEdit';
+import  WorkersFormCreate  from './components/Worker/WorkersFormCreate';
+import WorkerEdit from './components/Worker/WorkerEdit';
+import SupervisorCreate from './components/Supervisor/SupervisorCreate';
+import SupervisorEdit from './components/Supervisor/SupervisorEdit';
+import BundlesCreate from './components/Bundle/BundleCreate';
 export const App = () => {
     return (
         <>
@@ -47,11 +52,15 @@ export const App = () => {
                         <Route path='/machines' element={<Machines />} />
                         <Route path='/machine-issues' element={<MachineIssue/>} />
                         <Route path='/worker' element={<Workers/>} />
+                        <Route path='/worker/create' element={<WorkersFormCreate/>} />
+                        <Route path='/worker/edit/:id' element={<WorkerEdit/>} />
                         <Route path='/supervisor' element={<Supervisor/>} />
+                        <Route path='/supervisor/create' element={<SupervisorCreate/>} />
+                        <Route path='/supervisor/edit/:id' element={<SupervisorEdit/>} />
                         <Route path='/bundel' element={<Bundles/>} />
+                        <Route path='/bundel/create' element={<BundlesCreate/>} />
                         <Route path='/task' element={<Tasks/>} />
                         <Route path='/report' element={<Reports/>} />
-
                         {/* Add more routes as needed */}
                     </Route>
                     <Route path="/" element={<Login />} />

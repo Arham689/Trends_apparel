@@ -126,21 +126,6 @@ const StyleList = () => {
         return <h1 className='py-12 px-5 bg-red-200 rounded-lg text-red-600 text-2xl border-red-500 border-[2px]'>Something Went Wrong Please Try Again Later... </h1>
     }
 
-    // function flattenObject(obj, prefix = '') {
-    //     return Object.keys(obj).reduce((acc, key) => {
-    //         const pre = prefix.length ? `${prefix}_` : '';
-            
-    //         if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
-    //             Object.assign(acc, flattenObject(obj[key], `${pre}${key}`));
-    //         } else {
-    //             acc[`${pre}${key}`] = obj[key];
-    //         }
-            
-    //         return acc;
-    //     }, {});
-    // }
-      
-
 
   return (
     <div className="bg-white shadow rounded-lg overflow-hidden" >

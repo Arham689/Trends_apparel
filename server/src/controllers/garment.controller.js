@@ -76,3 +76,19 @@ export const deleteGarment = asyncErrorHandler(async (req ,res, next ) => {
     })
 })
 
+export const getGarmentByStyleId = asyncErrorHandler(async (req , res , next )=>{
+    const id = req.params.id
+
+    const data = await Garment.findOne({style : id })
+
+    if(!data) {
+        const err = new customError('Data not found' , 404)
+        return next(err)
+    }
+
+    res.status(200).json({
+        message : "successfull",
+        data :  [data]
+    })
+
+})

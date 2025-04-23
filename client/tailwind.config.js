@@ -66,15 +66,23 @@ export default {
 			dropdownIn: {
 				"0%": { height: "0" },
 				"100%": { height: "100%" }
-			  }
+			},
+			dropdown: {
+			  '0%': { opacity: '0', transform: 'translateY(-10px)' },
+			  '100%': { opacity: '1', transform: 'translateY(0)' },
+			},
+			
 		},
 		animation: {
 			fadeIn: 'fadeIn 0.2s ease-out forwards',
 			fadeOut : "fadeOut 0.2s ease-out forwards" ,
-			dropdownIn : "dropdownIn 0.9s ease-out forwards"
+			dropdownIn : "dropdownIn 0.9s ease-out forwards",
+			dropdown: 'dropdown 0.3s ease-out forwards',
 		},
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+		require("tailwindcss-animate") 
+	],
 }
 

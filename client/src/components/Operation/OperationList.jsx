@@ -178,14 +178,13 @@ const OperationList = () => {
         <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50 ">
                 <tr>
-                    {/* Render table headers dynamically */}
+
                     {fieldsToDisplay.map(field => (
                         <th 
                             key={field.label} 
                             scope="col" 
                             className="px-6 py-5 text-left text-xs font-medium text-gray-600 uppercase tracking-wider"
                         >
-                            {/* Convert camelCase to Title Case for display */}
                             {field.value.toUpperCase()}
                         </th>
                     ))}
