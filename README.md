@@ -23,12 +23,16 @@
 
     run `cd server`
 
+    run `npm install`
+
     then `npm run dev`
 
 4. To start the frontend create a new terminal in Trends folder 
 
     run `cd client`
-    
+
+    run `npm install`
+
     then `npm run dev`
 
 
