@@ -398,7 +398,13 @@ export const getBundleByTid = asyncErrorHandler(async (req , res , next )=>{
 
 export const getGroupBundle = asyncErrorHandler(async (req, res, next) => {
   //TODO : also send the Task_id (garment , style , DATE )
+  const userId = req.user._id;
   const groupedBundles = await Bundle.aggregate([
+    {
+      $match: {
+        userId: userId // filter by logged-in user
+      }
+    },
     { $sort: { serial_end : -1 } },
     {
       $group: {

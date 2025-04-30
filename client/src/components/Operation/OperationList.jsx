@@ -131,7 +131,7 @@ const OperationList = () => {
     
         setOperationList(prev => [...prev, flattened]);
     
-        setInput('');
+        // setInput('');
     }
     
     const handleAddList = () => {
