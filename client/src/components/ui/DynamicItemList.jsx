@@ -3,6 +3,7 @@ import EditDepartment from '../Department/EditDepartment'
 import { useState } from "react"
 import axios from "axios"
 import SidebarForm from "./SideBarForm"
+import { toast } from "@/hooks/use-toast"
 
 const base_url = import.meta.env.VITE_BASE_API_URL
 
@@ -18,8 +19,16 @@ const DynamicItemList = ({ item, setDepartmentList, departmentList, fieldsToDisp
             await axios.delete(`${base_url}/${endpoint}/${id}`, { withCredentials: true })
             const newList = departmentList.filter((i) => i._id !== id)
             setDepartmentList(newList)
+            toast({
+                variant: "green",
+                title: "Successful",
+              })
         } catch (error) {
             console.log(error)  
+            toast({
+                variant: "destructive",
+                title: "Unsuccessful",
+              })
         }   
     }
 

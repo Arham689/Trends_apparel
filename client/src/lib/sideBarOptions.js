@@ -174,13 +174,13 @@ export const data = [
   "path" : "/task",
   "options" : []
 },
-{
-  "id":21,
-  "name" : "Reports",
-  "isDropdown":false, 
-  "icon" : BarChart2,
-  "path": '/report',
-  "options" : []
-}
+// {
+//   "id":21,
+//   "name" : "Reports",
+//   "isDropdown":false, 
+//   "icon" : BarChart2,
+//   "path": '/report',
+//   "options" : []
+// }
 
 ]

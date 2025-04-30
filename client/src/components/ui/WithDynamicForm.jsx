@@ -3,6 +3,7 @@ import axios from 'axios';
 import OperatoinMultiSearch from '../Operation/OperatoinMultiSearch';
 import { fetchAndTransformList } from '@/utils/getAndTransformList';
 import {ChevronDown } from "lucide-react"
+import { toast } from '@/hooks/use-toast';
 // import DropdownSelect from './DropdownSelect'; // Import our new component
 
 /**
@@ -151,14 +152,22 @@ const OperationMappingForm = ({
       }
       
       setFormValues({});
+      toast({
+        variant: "green",
+        title: "Successful",
+    })
     } catch (error) {
       console.error(`Error ${isEditing ? 'updating' : 'submitting'} form:`, error);
-      
+      toast({
+        variant: "destructive",
+        title: " Unsuccessful",
+      })
       // Handle API errors
       if (error.response?.data?.errors) {
         setErrors(error.response.data.errors);
         console.log('API returned errors:', error.response.data.errors);
       }
+      
     } finally {
       setIsSubmitting(false);
       console.log('Form submission completed');

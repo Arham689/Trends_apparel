@@ -1,3 +1,4 @@
+import { toast } from '@/hooks/use-toast'
 import useFetch from '@/hooks/useFetch'
 import { flattenObject } from '@/lib/utils'
 import axios from 'axios'
@@ -32,8 +33,16 @@ const MappingList = () => {
             await axios.delete(`${base_url}/api/v1/mapping/${id}`, { withCredentials: true })
             const newList = mappingList.filter((i) => i._id !== id)
             setMappingList(newList)
+            toast({
+              variant: "green",
+              title: "Deleted Successful",
+            })
         } catch (error) {
             console.log(error)  
+            toast({
+              variant: "destructive",
+              title: " Unsuccessful",
+            })
         }   
     }
   return (
@@ -69,8 +78,18 @@ const MappingList = () => {
                 </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
+              {
+                mappingList.length > 0 || (
+                  <tr>
+                      <td colSpan="3" className="px-6 py-4  text-center text-sm text-gray-500">
+                          No Mapping Found
+                      </td>
+                  </tr>
+              )
+              }
                 {mappingList.map((item , i ) => (   
                     <tr className="border-b border-gray-200">
+                      
                     {fieldsToDisplay.map((field, i) => {
 
                       console.log(field)

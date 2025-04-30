@@ -194,20 +194,29 @@ const OperationList = () => {
                 </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-                {operationList.map((item , i ) => (
-                    <DynamicItemList 
-                        key={i} 
-                        item={item} 
-                        title={'Operation'}
-                        setDepartmentList={setOperationList} 
-                        departmentList={operationList}
-                        fieldsToDisplay={fieldsToDisplay}
-                        endpoint={'api/v1/operation'}
-                        editingFields={operationFields}
-                        handleUpdate={handleUpdate}
-                        initialValues={''}
-                    />
-                ))}
+                {
+                    operationList.length > 0 ? 
+                    operationList.map((item , i ) => (
+                        <DynamicItemList 
+                            key={i} 
+                            item={item} 
+                            title={'Operation'}
+                            setDepartmentList={setOperationList} 
+                            departmentList={operationList}
+                            fieldsToDisplay={fieldsToDisplay}
+                            endpoint={'api/v1/operation'}
+                            editingFields={operationFields}
+                            handleUpdate={handleUpdate}
+                            initialValues={''}
+                        />
+                    )) : (
+                        <tr>
+                            <td colSpan="3" className="px-6 py-4  text-center text-sm text-gray-500">
+                                No Operation Found
+                            </td>
+                        </tr>
+                    )
+                }
             </tbody>
         </table>
         </div>

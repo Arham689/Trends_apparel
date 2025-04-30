@@ -4,7 +4,6 @@ import { Size } from "../models/size.models.js";
 import { asyncErrorHandler } from "../utils/asyncErrorHandler.js";
 import customError from "../utils/CustomError.js";
 export const getSize = asyncErrorHandler(async (req , res , next ) => {
-    console.log("user" , req.user)
     const userId = req.user._id
 
     const data = await Size.find({userId})
@@ -16,7 +15,6 @@ export const getSize = asyncErrorHandler(async (req , res , next ) => {
 })
 
 export const postSize = asyncErrorHandler(async (req, res , next )=>{
-    console.log("user" , req.user)
     const userId = req.user._id;
     const data =  await Size.create({...req.body , userId })
 

@@ -121,22 +121,31 @@ const MachineIssueList = () => {
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    {machineIssueList.map((item , i ) => (
-                        <DynamicItemList
-                            key={i} 
-                            item={item} 
-                            title={'Issue'}
-                            setDepartmentList={setMachineIssueList} 
-                            departmentList={machineIssueList}
-                            fieldsToDisplay={fieldsToDisplay}
-                            endpoint={'api/v1/issue'}
-                            editingFields={machineIssueFields}
-                            handleUpdate={handleUpdate}
-                            initialValues={{
-                                issueName: input,
-                            }}
-                        />
-                    ))}
+                    {
+                        machineIssueList.length > 0 ? 
+                        machineIssueList.map((item , i ) => (
+                            <DynamicItemList
+                                key={i} 
+                                item={item} 
+                                title={'Issue'}
+                                setDepartmentList={setMachineIssueList} 
+                                departmentList={machineIssueList}
+                                fieldsToDisplay={fieldsToDisplay}
+                                endpoint={'api/v1/issue'}
+                                editingFields={machineIssueFields}
+                                handleUpdate={handleUpdate}
+                                initialValues={{
+                                    issueName: input,
+                                }}
+                            />
+                        )) : (
+                            <tr>
+                                <td colSpan="3" className="px-6 py-4  text-center text-sm text-gray-500">
+                                    No Machine Issue Found
+                                </td>
+                            </tr>
+                        )
+                    }
                 </tbody>
             </table>
         </div>

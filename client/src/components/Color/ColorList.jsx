@@ -126,7 +126,10 @@ const ColorList = () => {
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    {colorList.map((item , i ) => (
+                    {
+                    
+                    colorList.length > 0 ?
+                    colorList.map((item , i ) => (
                         <DynamicItemList 
                             key={i} 
                             item={item} 
@@ -142,7 +145,14 @@ const ColorList = () => {
                                 status : "Active" 
                             }}
                         />
-                    ))}
+                    )) : (
+                        <tr>
+                            <td colSpan="3" className="px-6 py-4  text-center text-sm text-gray-500">
+                                No Color found
+                            </td>
+                        </tr>
+                    )}
+
                 </tbody>
             </table>
 

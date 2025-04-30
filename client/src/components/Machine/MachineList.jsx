@@ -137,23 +137,32 @@ const MachineList = () => {
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    {machineList.map((item , i ) => (
-                        <DynamicItemList
-                            key={i} 
-                            item={item} 
-                            title={'machine'}
-                            setDepartmentList={setMachineList} 
-                            departmentList={machineList}
-                            fieldsToDisplay={fieldsToDisplay}
-                            endpoint={'api/v1/machine'}
-                            editingFields={machineFields}
-                            handleUpdate={handleUpdate}
-                            initialValues={{
-                                machineName: input,
-                                status : "Active" 
-                            }}
-                        />
-                    ))}
+                    {
+                        machineList.length > 0 ? 
+                        machineList.map((item , i ) => (
+                            <DynamicItemList
+                                key={i} 
+                                item={item} 
+                                title={'machine'}
+                                setDepartmentList={setMachineList} 
+                                departmentList={machineList}
+                                fieldsToDisplay={fieldsToDisplay}
+                                endpoint={'api/v1/machine'}
+                                editingFields={machineFields}
+                                handleUpdate={handleUpdate}
+                                initialValues={{
+                                    machineName: input,
+                                    status : "Active" 
+                                }}
+                            />
+                        )) :(
+                            <tr>
+                                <td colSpan="3" className="px-6 py-4  text-center text-sm text-gray-500">
+                                    No Machine Found
+                                </td>
+                            </tr>
+                        )
+                    }
                 </tbody>
             </table>
 

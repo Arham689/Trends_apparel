@@ -95,7 +95,7 @@ const SizeList = () => {
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    {sizeList.map((item , i ) => (
+                    {sizeList.length > 0 ? sizeList.map((item , i ) => (
                         <DynamicItemList 
                             key={i} 
                             item={item} 
@@ -110,7 +110,14 @@ const SizeList = () => {
                                 sizeName: input,
                             }}
                         />
-                    ))}
+                    )): (
+                            <tr>
+                                <td colSpan="3" className="px-6 py-4 text-center text-sm text-gray-500">
+                                    No Size found
+                                </td>
+                            </tr>
+                        )}
+                    
                 </tbody>
             </table>
         </div>

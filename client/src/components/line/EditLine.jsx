@@ -1,3 +1,4 @@
+import { toast } from '@/hooks/use-toast'
 import axios from 'axios'
 import { X } from 'lucide-react'
 import React, { useState } from 'react'
@@ -31,8 +32,16 @@ const EditLine = ({isEdit , setIsEdit , itemId , LineList , setLineList }) => {
             setLineList(newline)
             setIsEdit(false)
             setInput('')
+            toast({
+                variant: "green",
+                title: "Successful",
+              })
         } catch (error) {
             console.log(error)
+            toast({
+                variant: "destructive",
+                title: " Unsuccessful",
+            })
         }
     }
 

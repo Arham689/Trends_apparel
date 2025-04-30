@@ -1,3 +1,4 @@
+import { toast } from '@/hooks/use-toast';
 import useFetch from '@/hooks/useFetch';
 import { fetchAndTransformList } from '@/utils/getAndTransformList';
 import axios from 'axios';
@@ -64,8 +65,17 @@ const WorkerDynamicForm = ({method = 'POST' , initialValue = {} }) => {
             setTimeout(() => {
                 window.history.back()
             },800);
+            toast({
+              variant: "green",
+              title: "Successful",
+            })
         } catch (error) {
             console.log(error)
+            toast({
+              variant: "destructive",
+              title: " Unsuccessful",
+            })
+
         }
     };
 

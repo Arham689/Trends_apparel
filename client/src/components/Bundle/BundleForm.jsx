@@ -5,6 +5,7 @@ const base_url = import.meta.env.VITE_BASE_API_URL
 import { FormFields } from '@/utils/BundleFormFileds';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from '@/hooks/use-toast';
 
 
 
@@ -314,8 +315,16 @@ const BundleForm = ({setBundleOperations , setOperationError , setBundelQuantity
       console.log(bundelQuantity)
       await axios.post(`${base_url}/api/v1/bundle/bulk` , bundelQuantity , {withCredentials : true})
       navigate('/bundel')
+      toast({
+        variant: "green",
+        title: "Successful",
+      })
     } catch (error) {
       console.log(error)
+      toast({
+        variant: "destructive",
+        title: " Unsuccessful",
+      })
       // set error state 
     }
    

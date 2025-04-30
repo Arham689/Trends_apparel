@@ -1,11 +1,14 @@
 import useFetch from '@/hooks/useFetch'
 import { fetchAndTransformList } from '@/utils/getAndTransformList'
 import axios from 'axios'
-import { CookingPot } from 'lucide-react'
+import { CookingPot, Eye } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 const base_url = import.meta.env.VITE_BASE_API_URL
+import { useToast } from "@/hooks/use-toast"
+import { useNavigate } from 'react-router-dom'
 
 const TaskList = () => {
+    const { toast } = useToast()
     const {data, isLoading, error} = useFetch(`${base_url}/api/v1/grouped-bundle`)
     const [TaskList, setTaskList] = useState([])   
     const [dropdownStates, setDropdownStates] = useState({});
@@ -22,7 +25,7 @@ const TaskList = () => {
         name: 'supervisor_id',
         options : [] 
     }])
-
+    const navigate = useNavigate() 
     useEffect(() => {
         // get and transform supervisor , line , section 
         fetchAndTransformList({
@@ -94,9 +97,17 @@ const TaskList = () => {
         console.log(payload)
         try {
             const res = await axios.patch(`${base_url}/api/v1/groupedBundles`, payload ,  {withCredentials : true });
+            toast({
+              variant: "green",
+              title: "Update successful",
+            })
             console.log('Update successful:', res.data);
         } catch (err) {
             console.error('Update failed:', err.response?.data || err.message);
+            toast({
+              variant: "destructive",
+              title: " Unsuccessful",
+            })
         }
     };
 
@@ -113,23 +124,33 @@ const TaskList = () => {
                         <th className="px-4 py-2 font-light">TOTAL QTY PRODUCTION</th>
                         <th className="px-4 py-2 font-light">LINE</th>
                         <th className="px-4 py-2 font-light">SECTION</th>
+                        <th className="px-4 py-2 font-light">ACTION</th>
                     </tr>
                 </thead>
                 <tbody className='text-gray-500'>
+                    {
+                      TaskList.length > 0 || (
+                        <tr>
+                            <td colSpan="3" className="px-6 py-4  text-center text-sm text-gray-500">
+                                No Garment found
+                            </td>
+                        </tr>
+                    )
+                    }
                     {
                         TaskList.map((i, index) => {
                             return (
                                 <tr key={index} className="border-t">
                                     <td className="px-4 py-4">
                                         <Dropdown
-                                            name="supervisor"
-                                            label="Supervisor"
-                                            options={supervisorOptions[0].options}
-                                            value={dropdownStates[`row-${index}`]?.supervisor || `${i.supervisorName}` || '' }
-                                            onChange={(fieldName, option) => 
-                                                handleDropdownChange(index, fieldName, option)
-                                            }
-                                            placeholder={`${i.supervisorName}` || 'supervisor'}
+                                          name="supervisor"
+                                          label="Supervisor"
+                                          options={supervisorOptions[0].options}
+                                          value={dropdownStates[`row-${index}`]?.supervisor || `${i.supervisorName}` || '' }
+                                          onChange={(fieldName, option) => 
+                                              handleDropdownChange(index, fieldName, option)
+                                          }
+                                          placeholder={`${i.supervisorName}` || 'supervisor'}
                                         />
                                     </td>
                                     <td className="px-4 py-4">
@@ -168,6 +189,7 @@ const TaskList = () => {
                                             placeholder={`${i.sectionName}` || 'section'}
                                         />
                                     </td>
+                                    <td className="px-4 py-4 text-orange-400 "><div className='hover:text-orange-600 cursor-pointer' onClick={()=>{navigate(`/bundel-report/${i.taskId}`)}}><Eye/></div></td>
                                 </tr>
                             )
                         })

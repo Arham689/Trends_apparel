@@ -198,25 +198,33 @@ const GarmentList = () => {
                 </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-                {garmentList.map((item , i ) => (
-                    <DynamicItemList 
-                        key={i} 
-                        item={item} 
-                        title={'Garemnt Code'}
-                        setDepartmentList={setGarmentList} 
-                        departmentList={garmentList}
-                        fieldsToDisplay={fieldsToDisplay}
-                        endpoint={'api/v1/garment-code'}
-                        editingFields={garmentFields}
-                        handleUpdate={handleUpdate}
-                        initialValues={{
-                            garmentName: input,
-                            orderQuantity : "" ,
-                            style : "",
-                            color : ""
-                        }}
-                    />
-                ))}
+                {
+                    garmentList.length > 0 ? garmentList.map((item , i ) => (
+                        <DynamicItemList 
+                            key={i} 
+                            item={item} 
+                            title={'Garemnt Code'}
+                            setDepartmentList={setGarmentList} 
+                            departmentList={garmentList}
+                            fieldsToDisplay={fieldsToDisplay}
+                            endpoint={'api/v1/garment-code'}
+                            editingFields={garmentFields}
+                            handleUpdate={handleUpdate}
+                            initialValues={{
+                                garmentName: input,
+                                orderQuantity : "" ,
+                                style : "",
+                                color : ""
+                            }}
+                        />
+                    )) : (
+                        <tr>
+                            <td colSpan="3" className="px-6 py-4  text-center text-sm text-gray-500">
+                                No Garment found
+                            </td>
+                        </tr>
+                    )
+                }
             </tbody>
         </table>
         </div>

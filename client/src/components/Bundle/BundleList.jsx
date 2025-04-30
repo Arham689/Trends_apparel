@@ -88,38 +88,46 @@ const BundleList = () => {
         </tr>
         </thead>
         <tbody className='text-gray-500'>
-          {bundles.map((bundle, index) => (
-            <tr key={index} className="border-t">
-              <td className="px-4 py-4">{index + 1}</td>
-              <td className="px-4 py-4">{bundle.style_styleName}</td>
-              <td className="px-4 py-4">{bundle.garment_garmentName}</td>
-              <td className="px-4 py-4">{bundle.bundleName}</td>
-              <td className="px-4 py-4 bg-gray-100 rounded ">
-                {bundle.serial_start}-{bundle.serial_end}
-              </td>
-              <td className="px-4 py-4">{bundle.size_sizeName}</td>
-              <td className="text-center ">
-                <div className='text-center bg-red-100 text-red-800 mx-auto px-4 w-fit p-1'>
-                  {new Date(bundle.production_date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </div>
-              </td>
-              <td className="px-4 py-4 flex justify-around text-left">
-                <button
-                  onClick={() => onDelete(bundle)}
-                  className="text-red-500 hover:text-red-400 font-light text-[5px]"
-                >
-                  <Trash2 size={22}/>
-                </button>
-                <button className=' text-green-400 ' onClick={()=>{handleGenerateBolb(bundle)}}>
-                  <FileText size={22}/>
-                </button>
-              </td>
-            </tr>
-          ))}
+          {
+            bundles.length > 0 ? bundles.map((bundle, index) => (
+              <tr key={index} className="border-t">
+                <td className="px-4 py-4">{index + 1}</td>
+                <td className="px-4 py-4">{bundle.style_styleName}</td>
+                <td className="px-4 py-4">{bundle.garment_garmentName}</td>
+                <td className="px-4 py-4">{bundle.bundleName}</td>
+                <td className="px-4 py-4 bg-gray-100 rounded ">
+                  {bundle.serial_start}-{bundle.serial_end}
+                </td>
+                <td className="px-4 py-4">{bundle.size_sizeName}</td>
+                <td className="text-center ">
+                  <div className='text-center bg-red-100 text-red-800 mx-auto px-4 w-fit p-1'>
+                    {new Date(bundle.production_date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </div>
+                </td>
+                <td className="px-4 py-4 flex justify-around text-left">
+                  <button
+                    onClick={() => onDelete(bundle)}
+                    className="text-red-500 hover:text-red-400 font-light text-[5px]"
+                  >
+                    <Trash2 size={22}/>
+                  </button>
+                  <button className=' text-green-400 ' onClick={()=>{handleGenerateBolb(bundle)}}>
+                    <FileText size={22}/>
+                  </button>
+                </td>
+              </tr>
+            )) : (
+              <tr>
+                  <td colSpan="3" className="px-6 py-4  text-center text-sm text-gray-500">
+                      No Bundle found
+                  </td>
+              </tr>
+          )
+          }
         </tbody>
       </table>
     </div>

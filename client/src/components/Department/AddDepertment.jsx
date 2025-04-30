@@ -1,3 +1,4 @@
+import { toast } from "@/hooks/use-toast";
 import axios from "axios"
 import { X } from "lucide-react"
 import { useState } from "react";
@@ -17,8 +18,17 @@ const AddDepertment = ({ isOpen, setIsOpen, input, setInput, setDepartmentList }
             setDepartmentList((d) => [...d, { DepartmentName: e.target.department.value.toUpperCase(), status: e.target.ActiveOrInactive.value , _id : data.data.id}])
             setInput('')
             setIsOpen(false)
+            toast({
+                variant: "green",
+                title: " Successful",
+            })
+
         } catch (error) {
             console.log(error)
+            toast({
+                variant: "destructive",
+                title: " Unsuccessful",
+            })
         }
     }
     return (

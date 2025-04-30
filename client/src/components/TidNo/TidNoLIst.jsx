@@ -106,23 +106,33 @@ const TidNoLIst = () => {
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    {tidNoList.map((item , i ) => (
-                        <DynamicItemList 
-                            key={i} 
-                            item={item} 
-                            title={'TIDNO.'}
-                            setDepartmentList={setTidNoList} 
-                            departmentList={tidNoList}
-                            fieldsToDisplay={fieldsToDisplay}
-                            endpoint={'api/v1/tidno'}
-                            editingFields={tidNoFields}
-                            handleUpdate={handleUpdate}
-                            initialValues={{
-                                TIDNOName: input,
-                                status : "Active" 
-                            }}
-                        />
-                    ))}
+                    {
+                        tidNoList.length > 0 ?
+                        tidNoList.map((item , i ) => (
+                            <DynamicItemList 
+                                key={i} 
+                                item={item} 
+                                title={'TIDNO.'}
+                                setDepartmentList={setTidNoList} 
+                                departmentList={tidNoList}
+                                fieldsToDisplay={fieldsToDisplay}
+                                endpoint={'api/v1/tidno'}
+                                editingFields={tidNoFields}
+                                handleUpdate={handleUpdate}
+                                initialValues={{
+                                    TIDNOName: input,
+                                    status : "Active" 
+                                }}
+                            />
+                        )): (
+                            <tr>
+                                <td colSpan="3" className="px-6 py-4  text-center text-sm text-gray-500">
+                                    No Tid No. Found
+                                </td>
+                            </tr>
+                        )
+                    }
+                    {}
                 </tbody>
             </table>
 

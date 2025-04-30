@@ -1,3 +1,4 @@
+import { toast } from '@/hooks/use-toast'
 import axios from 'axios'
 import { CookingPot, X } from 'lucide-react'
 import React, { useState } from 'react'
@@ -27,13 +28,20 @@ const EditDepartment = ({isEdit , setIsEdit , itemId ,departmentList, setDepartm
                   return item;
                 }
               });
-              
+              toast({
+                variant: "green",
+                title: "Updated",
+              })
             setDepartmentList(newDepartment)
             setIsEdit(false)
             setInput('')
             // setIsOpen(false)
         } catch (error) {
             console.log(error)
+            toast({
+                variant: "destructive",
+                title: " Unsuccessful",
+            })
         }
     }
   return (

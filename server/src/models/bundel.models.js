@@ -13,6 +13,11 @@ const BundleSchema = new Schema({
     // unique : true ,
     trim : true ,
   },
+  task_id: {
+    type: String,
+    // unique : true ,
+    trim : true ,
+  },
   bundle_operations: [{
     type: Schema.Types.ObjectId,
     ref: 'Operation',

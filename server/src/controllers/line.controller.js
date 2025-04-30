@@ -2,7 +2,6 @@ import { Line } from "../models/lines.models.js";
 import { asyncErrorHandler } from "../utils/asyncErrorHandler.js";
 import customError from "../utils/CustomError.js";
 export const getLine = asyncErrorHandler(async (req , res , next ) => {
-    console.log("user" , req.user)
     const userId = req.user._id
 
     const data = await Line.find({userId})
@@ -14,7 +13,7 @@ export const getLine = asyncErrorHandler(async (req , res , next ) => {
 })
 
 export const postLine = asyncErrorHandler(async (req, res , next )=>{
-    console.log("user" , req.user)
+
     const userId = req.user._id;
     const data =  await Line.create({...req.body , userId })
 

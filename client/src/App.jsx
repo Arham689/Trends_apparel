@@ -28,6 +28,7 @@ import WorkerEdit from './components/Worker/WorkerEdit';
 import SupervisorCreate from './components/Supervisor/SupervisorCreate';
 import SupervisorEdit from './components/Supervisor/SupervisorEdit';
 import BundlesCreate from './components/Bundle/BundleCreate';
+import BundleReport from './pages/BundleReport';
 export const App = () => {
     return (
         <>
@@ -59,6 +60,7 @@ export const App = () => {
                         <Route path='/supervisor/edit/:id' element={<SupervisorEdit/>} />
                         <Route path='/bundel' element={<Bundles/>} />
                         <Route path='/bundel/create' element={<BundlesCreate/>} />
+                        <Route path='/bundel-report/:id' element={<BundleReport/>} />
                         <Route path='/task' element={<Tasks/>} />
                         <Route path='/report' element={<Reports/>} />
                         {/* Add more routes as needed */}

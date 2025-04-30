@@ -1,5 +1,35 @@
 # Intern_project
 
+## How to Set up 
+1. Open in Trends folder 
+2. In client and server create .env file
+
+--> .env for server 
+
+    NODE_ENV=development
+
+    DB_URL=mongodb://localhost:27017/
+
+    PORT=8000
+
+    JWT_SECREAT='trends-apparels-secreat'
+
+    LOGIN_EXPIRE=30d
+--> .env for client
+
+    VITE_BASE_API_URL = "http://localhost:8000" 
+
+3. after the .env go to the Trends folder and open terminal
+
+    run `cd server`
+
+    then `npm run dev`
+
+4. To start the frontend create a new terminal in Trends folder 
+
+    run `cd client`
+    
+    then `npm run dev`
 
 
 ## Getting started

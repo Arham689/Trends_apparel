@@ -1,5 +1,6 @@
+import { useToast } from '@/hooks/use-toast'
 import axios from 'axios'
-import { ClockFading, X  , ChevronUp, ChevronDown } from 'lucide-react'
+import { ClockFading, X, ChevronUp, ChevronDown } from 'lucide-react'
 import React, { useState, useEffect } from 'react'
 const base_url = import.meta.env.VITE_BASE_API_URL
 
@@ -22,15 +23,27 @@ const SidebarForm = ({
   useEffect(() => {
     setFormValues(initialValues)
   }, [initialValues])
+  const {toast} = useToast()
+  // const handleChange = (fieldName, value) => {
+  //   console.log(fieldName, value)
+  //   setFormValues(prev => ({
+  //     ...prev,
+  //     [fieldName]: value
+  //   }))
+  // }
 
-
-  const handleChange = (fieldName, value) => {
-    console.log(fieldName, value)
+  const handleChange = (name, value) => {
+    // Convert to number if the field type is 'number'
+    const fieldType = fields.find(field => field.name === name)?.type;
+    const processedValue = fieldType === 'number' ? 
+      (value === '' ? '' : Number(value)) : // Convert to number, but keep empty string as is
+      value;
+      
     setFormValues(prev => ({
       ...prev,
-      [fieldName]: value
-    }))
-  }
+      [name]: processedValue
+    }));
+  };
 
   const handleToggleDropdown = (name) => {
     if (visibleDropdown === name) {
@@ -45,39 +58,48 @@ const SidebarForm = ({
     setOpenDropdown(openDropdown === name ? null : name);
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       let response;
       console.log(formValues)
+      
+      // Ensure base_url ends with a trailing slash if endpoint doesn't start with one
+      const apiUrl = base_url.endsWith('/') || endpoint.startsWith('/') 
+        ? `${base_url}${endpoint}` 
+        : `${base_url}/${endpoint}`;
+      
       if (isEditing && itemId) {
-        console.log(`/${itemId}`)
         response = await axios.patch(
           `${base_url}/${endpoint}/${itemId}`, 
           formValues, 
           { withCredentials: true }
         )
       } else {
-
         response = await axios.post(
-          `${base_url}${endpoint}`, 
+          apiUrl, 
           formValues, 
           { withCredentials: true }
         )
       }
-      
 
       if (onSubmitSuccess) {
-        console.log("onSubmitSuccess",response.data)
+        console.log("onSubmitSuccess", response.data)
         onSubmitSuccess(response.data)
       }
       
       setFormValues(initialValues)
       setIsOpen(false)
+      toast({
+        variant : "green",
+        title : 'Successful'
+      })
     } catch (error) {
       console.error(`Error ${isEditing ? 'updating' : 'submitting'} form:`, error)
-
+      toast({
+        variant: "destructive",
+        title: " Unsuccessful",
+      })
     }
   }
 
@@ -100,26 +122,11 @@ const SidebarForm = ({
                   'Please select...'}
               </span>
               <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${openDropdown === field.name ? 'transform -rotate-180' : ''}`}  />
-              {/* <svg 
-                
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24" 
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg> */}
             </div>
             
             {/* Dropdown options */}
             {visibleDropdown === field.name && (
               <div className={`absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded shadow-lg max-h-60 overflow-auto ${animatingOut ? "animate-fadeOut" : "animate-fadeIn"}`}>
-                {/* <div 
-                  className="p-2 hover:bg-gray-100 cursor-pointer text-gray-400"
-                  onClick={() => handleOptionSelect(field.name, '')}
-                >
-                  Please select...
-                </div> */}
                 {field.options.map((option) => (
                   <div 
                     key={option.value} 
@@ -162,23 +169,20 @@ const SidebarForm = ({
     ));
   };
 
-const toggleDropdown = (fieldName) => {
-  setOpenDropdown(openDropdown === fieldName ? null : fieldName);
-};
+  const toggleDropdown = (fieldName) => {
+    setOpenDropdown(openDropdown === fieldName ? null : fieldName);
+  };
 
-const handleOptionSelect = (fieldName, value) => {
-  handleChange(fieldName, value);
-  setOpenDropdown(null);
-  setVisibleDropdown(false)
-};
-
-// Add this style to your component or CSS file
-
+  const handleOptionSelect = (fieldName, value) => {
+    handleChange(fieldName, value);
+    setOpenDropdown(null);
+    setVisibleDropdown(null);
+  };
 
   return (
     <div>
       {isOpen && (
-        <div onClick={() => setIsOpen(false)} className="fixed inset-0 bg-black bg-opacity-50 z-40" />
+        <div onClick={() => setIsOpen(false)} className="fixed inset-0 bg-black bg-opacity-20 z-40" />
       )}
 
       <div

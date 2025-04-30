@@ -173,24 +173,33 @@ const StyleList = () => {
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    {styleList.map((item , i ) => (
-                        <DynamicItemList
-                            key={i} 
-                            item={item} 
-                            title={"Style"}
-                            setDepartmentList={setStyleList} 
-                            departmentList={styleList}
-                            fieldsToDisplay={fieldsToDisplay}
-                            endpoint={'api/v1/style'}
-                            editingFields={styleFields}
-                            handleUpdate={handleUpdate}
-                            initialValues={{
-                                styleName: input,
-                                TidNo : tidNoList[0]?.value,
-                                status : "Active" 
-                            }}
-                        />
-                    ))}
+                    {
+                        styleList.length > 0 ? 
+                        styleList.map((item , i ) => (
+                            <DynamicItemList
+                                key={i} 
+                                item={item} 
+                                title={"Style"}
+                                setDepartmentList={setStyleList} 
+                                departmentList={styleList}
+                                fieldsToDisplay={fieldsToDisplay}
+                                endpoint={'api/v1/style'}
+                                editingFields={styleFields}
+                                handleUpdate={handleUpdate}
+                                initialValues={{
+                                    styleName: input,
+                                    TidNo : tidNoList[0]?.value,
+                                    status : "Active" 
+                                }}
+                            />
+                        )) : (
+                            <tr>
+                                <td colSpan="3" className="px-6 py-4  text-center text-sm text-gray-500">
+                                    No Style Found
+                                </td>
+                            </tr>
+                        )
+                    }
                 </tbody>
 
         </table>

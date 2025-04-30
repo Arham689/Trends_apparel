@@ -1,3 +1,4 @@
+import { toast } from '@/hooks/use-toast'
 import axios from 'axios'
 import { X } from 'lucide-react'
 import React, { useState } from 'react'
@@ -17,8 +18,16 @@ const AddLine = ({isOpen, setIsOpen,  setLineList, setInput ,input }) => {
             setLineList((d) => [...d, { lineName: e.target.line.value , _id : data.data.id }])
             setInput('')
             setIsOpen(false)
+            toast({
+                variant: "green",
+                title: " Successful",
+            })
         } catch (error) {
             console.log(error)
+            toast({
+                variant: "destructive",
+                title: " Unsuccessful",
+              })
         }
     }
   return (

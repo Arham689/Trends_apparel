@@ -58,18 +58,27 @@ export const WorkerList = () => {
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200 ">
-                    {workerList.map(item => (
-                    <WorkerItem
-                        key={item._id}
-                        item={item}
-                        setItemList={setWorkerList}
-                        itemList={workerList}
-                        fieldsToDisplay={fieldsToDisplay}
-                        endpoint={'/api/v1/worker'}
-                        title={'worker'}
-                        // onEdit={handleEdit}
-                    />
-                    ))}
+                    {
+                        workerList.length > 0 ?
+                        workerList.map(item => (
+                            <WorkerItem
+                                key={item._id}
+                                item={item}
+                                setItemList={setWorkerList}
+                                itemList={workerList}
+                                fieldsToDisplay={fieldsToDisplay}
+                                endpoint={'/api/v1/worker'}
+                                title={'worker'}
+                                // onEdit={handleEdit}
+                            />
+                            )) : (
+                            <tr>
+                                <td colSpan="3" className="px-6 py-4  text-center text-sm text-gray-500">
+                                    No Worker Found
+                                </td>
+                            </tr>
+                        )
+                    }
                 </tbody>
                 </table>
           </div>

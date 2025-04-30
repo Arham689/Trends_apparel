@@ -108,7 +108,6 @@ export const getOperationsForBundle = asyncErrorHandler(async (req, res, next) =
   const styledId = req.query.styledId;
   const garmentId = req.query.garmentId;
 
-  console.log(ObjectId.createFromHexString(trendId))
   // Check validity of ObjectIds
   if (!ObjectId.isValid(trendId) || !ObjectId.isValid(styledId) || !ObjectId.isValid(garmentId)) {
     return next(new customError('Invalid ObjectId in query parameters', 400));

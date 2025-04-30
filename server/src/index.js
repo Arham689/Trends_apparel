@@ -22,6 +22,7 @@ import issueRoute from "./routes/machineIssue.route.js"
 import workerRoute from "./routes/wokrer.router.js"
 import supervisorRotue from "./routes/supervisor.route.js"
 import bundleRoute from "./routes/bundle.route.js"
+import hourlyReportRoute from "./routes/hourlyReport.js"
 
 dotenv.config() 
 const app = express() 
@@ -55,6 +56,7 @@ app.use('/api/v1' , issueRoute)
 app.use('/api/v1' , workerRoute)
 app.use('/api/v1' , supervisorRotue)
 app.use('/api/v1' , bundleRoute)
+app.use('/api/v1' , hourlyReportRoute)
 
 app.use('/api/auth' , authRoute)
 

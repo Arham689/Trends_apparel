@@ -4,7 +4,6 @@ import {
   ChevronDown, ChevronRight, Menu, PanelLeft, X
 } from 'lucide-react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { buttonBaseClasses } from '@mui/material';
 
 const List = ({ list }) => {
   const location = useLocation();
@@ -131,7 +130,7 @@ const Sidebar = () => {
       { isOpen || <button
         id="sidebar-toggle"
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-50 lg:hidden bg-white p-2 rounded-md shadow-md"
+        className="fixed top-6 left-4 z-50 lg:hidden bg-white p-2 rounded-md "
         aria-label="Toggle sidebar"
       >
         <PanelLeft size={24} />
